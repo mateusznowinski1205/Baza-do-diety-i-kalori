@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS  Ceny(
     id_sklepu int not NULL,
     cena numeric(5,2) not NULL,
     data_zmiany DATE,
-
     constraint produkt FOREIGN KEY (id_produktu) REFERENCES produkty(id_produktu),
     constraint sklep FOREIGN KEY (id_sklepu) REFERENCES sklep(id_sklepu)
 );
