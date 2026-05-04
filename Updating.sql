@@ -60,3 +60,25 @@ ALTER TABLE ceny DROP COLUMN id_produktu;
 ALTER TABLE warainty_i_makro RENAME TO warianty_i_makro;
 
 -- i pare kosmetycznych zmian jak nazwy czy usuwanie column ktych zapomniale usunac
+-- 3 kolejne zmainy i optymalzacja bazy 
+
+alter table warainty_i_makro 
+add column mikroskladniki json; -- wczesniej usunem a kolumne z nazwy produktow 
+
+
+-- doadnie dwoch nowych tabel dla leszych raportów i podsumowan dnia i tygodnia czy miesaca 
+CREATE TABLE dziennik_dzienny (
+	id_dziennika INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
+	id_wariantu INT NOT NULL,
+	waga_zjedzona NUMERIC(6,2) NOT NULL,
+	data_spoz DATE NOT NULL, 
+	CONSTRAINT dat FOREIGN KEY (id_wariantu) REFERENCES warianty_i_makro(id_wariantu) 
+
+create table notatnik_kcal (
+	data_spoz date primary key,
+	suma_kcal numeric (6,2) not null,
+	suma_tlus numeric (5,2) not null,
+	suma_wegl numeric (5,2) not null,
+	suma_bial numeric (5,2) not null,
+	suma_cukr numeric (5,2) not null
+)
